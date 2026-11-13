@@ -1,4 +1,4 @@
-package org.ioopm.calculator.parser;
+package org.ioopm.calculator.parsing;
 
 import org.ioopm.calculator.ast.*;
 
