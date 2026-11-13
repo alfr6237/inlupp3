@@ -1,6 +1,6 @@
 package org.ioopm.calculator.ast;
 
-public abstract class Binary extends MathematicalExpression{
+public abstract class Binary extends SymbolicExpression{
     protected  SymbolicExpression _lhs;
     protected  SymbolicExpression _rhs;
 
