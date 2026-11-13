@@ -8,5 +8,7 @@ public abstract class Binary extends MathematicalExpression{
         _lhs = lhs;
         _rhs = rhs;
     }
+
+
     public abstract String toString();
 }

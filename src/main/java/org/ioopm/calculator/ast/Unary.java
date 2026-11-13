@@ -1,9 +1,9 @@
 package org.ioopm.calculator.ast;
 
 public abstract class Unary extends MathematicalExpression {
-    private final MathematicalExpression operand;
+    private final MathematicalExpression _operand;
 
     public Unary(MathematicalExpression operand){
-
+        _operand = operand;
     }
 }
