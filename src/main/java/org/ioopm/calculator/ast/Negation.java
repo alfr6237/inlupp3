@@ -8,6 +8,6 @@ public class Negation extends Unary{
 
     @Override
     public String toString(){
-        return "-" + _operand;
+        return "-" + _expression;
     }
 }
