@@ -1,6 +1,6 @@
 package org.ioopm.calculator.ast;
 
-public final class Quit extends Command {
+public class Quit extends Command {
     private static final Quit INSTANCE = new Quit();
 
     private Quit() {

@@ -281,7 +281,7 @@ public class CalculatorParser {
 
     /**
      * Checks if the token read is a number - should always be a number in this method
-     * @return a SymbolicExpression to be evaluated
+     * @return a SymbolicExp eression to be evaluated
      * @throws IOException by nextToken() if it reads invalid input
      * @throws SyntaxErrorException if the token parsed cannot be turned into a valid expression,
      *         expected a number which is not present
