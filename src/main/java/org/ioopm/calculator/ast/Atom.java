@@ -1,5 +1,7 @@
 package org.ioopm.calculator.ast;
 
-public abstract class Atom extends SymbolicExpression {
+import java.lang.annotation.Inherited;
+
+public abstract class Atom extends MathematicalExpression {
 
 }
