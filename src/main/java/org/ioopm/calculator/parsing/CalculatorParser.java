@@ -151,29 +151,43 @@ public class CalculatorParser {
         return result;
     }
 
+    // bättre att debugga än metoden under 
+    public SymbolicExpression expression() {
+        SymbolicExpression result = term();
+        while (st.ttype == '+' || st.ttype == '-') {
+            int operation = st.ttype;
+            st.nextToken();
+            if (operation == '+') {
+                result = new SymbolicExpression("Addition", result, term());
+            } else {
+                result = new SymbolicExpression("Subtraction", result, term());
+            }
+        }
+        return result;
+    }
 
-    /**
+    /** FIXME: UPPGRADERAD IMPLEMENTATION av expression ovan!
      * Checks wether the token read is an addition or subtraction
      * and then continue on with the right hand side of operator
      * @return a SymbolicExpression to be evaluated
      * @throws IOException by nextToken() if it reads invalid input
      */
-    private SymbolicExpression expression() throws IOException {
-        SymbolicExpression result = term();
-        this.st.nextToken();
-        while (this.st.ttype == ADDITION || this.st.ttype == SUBTRACTION) {
-            int operation = st.ttype;
-            this.st.nextToken();
-            if (operation == ADDITION) {
-                result = new Addition(result, term());
-            } else {
-                result = new Subtraction(result, term());
-            }
-            this.st.nextToken();
-        }
-        this.st.pushBack();
-        return result;
-    }
+    // private SymbolicExpression expression() throws IOException {
+    //     SymbolicExpression result = term();
+    //     this.st.nextToken();
+    //     while (this.st.ttype == ADDITION || this.st.ttype == SUBTRACTION) {
+    //         int operation = st.ttype;
+    //         this.st.nextToken();
+    //         if (operation == ADDITION) {
+    //             result = new Addition(result, term());
+    //         } else {
+    //             result = new Subtraction(result, term());
+    //         }
+    //         this.st.nextToken();
+    //     }
+    //     this.st.pushBack();
+    //     return result;
+    // }
 
     /**
      * Checks wether the token read is an Multiplication or
