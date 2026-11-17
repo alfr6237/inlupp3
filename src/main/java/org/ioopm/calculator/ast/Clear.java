@@ -10,8 +10,5 @@ public class Clear extends Command{
         return INSTANCE;
     }
 
-    @Override
-    public String toString(){
-        return "QUIT";
-    }
+
 }

@@ -6,7 +6,7 @@ public class Cos extends Unary{
     }
 
     @Override
-    public String toString(){
-        return "cos(" + _expression + ")";
+    public String getName(){
+        return "cos";
     }
 }

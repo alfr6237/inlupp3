@@ -7,11 +7,12 @@ public class Constant extends Atom {
         _value = value;
     }
 
-
     @Override
-    public String toString() {
-        return Double.toString(_value);
+    public boolean isConstant(){
+        return true;
     }
+
+
 
 
 };

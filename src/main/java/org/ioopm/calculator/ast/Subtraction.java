@@ -1,12 +1,12 @@
 package org.ioopm.calculator.ast;
 
-public class Subtraction extends Binary{
-    public Subtraction(SymbolicExpression lhs, SymbolicExpression rhs){
+public class Subtraction extends Binary {
+    public Subtraction(SymbolicExpression lhs, SymbolicExpression rhs) {
         super(lhs, rhs);
     }
 
     @Override
-    public String toString(){
-        return _lhs + " - " + _rhs;
+    public String getName() {
+        return "-";
     }
 }

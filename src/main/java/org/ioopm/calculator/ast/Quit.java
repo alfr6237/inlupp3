@@ -10,8 +10,4 @@ public class Quit extends Command {
         return INSTANCE;
     }
 
-    @Override
-    public String toString(){
-        return "QUIT";
-    }
 }

@@ -1,11 +1,12 @@
 package org.ioopm.calculator.ast;
 
 public class Division extends Binary {
-    public Division(SymbolicExpression lhs, SymbolicExpression rhs){
+    public Division(SymbolicExpression lhs, SymbolicExpression rhs) {
         super(lhs, rhs);
     }
+
     @Override
-    public String toString(){
-        return _lhs + " / " + _rhs;
+    public String getName() {
+        return "/";
     }
 }

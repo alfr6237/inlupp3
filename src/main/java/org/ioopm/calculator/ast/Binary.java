@@ -10,5 +10,5 @@ public abstract class Binary extends SymbolicExpression{
     }
 
 
-    public abstract String toString();
+
 }
