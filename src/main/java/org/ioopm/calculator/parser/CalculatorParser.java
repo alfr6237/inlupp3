@@ -1,12 +1,12 @@
-package org.ioopm.calculator.parsing;
+package org.ioopm.calculator.parser;
 
 import org.ioopm.calculator.ast.*;
 
+import java.io.IOException;
 import java.io.StreamTokenizer;
 import java.io.StringReader;
-import java.io.IOException;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Represents the parsing of strings into valid expressions defined in the AST.
@@ -29,14 +29,15 @@ public class CalculatorParser {
     // unallowerdVars is used to check if variabel name that we
     // want to assign new meaning to is a valid name eg 3 = Quit
     // or 10 + x = L is not allowed
-    private final ArrayList < String > unallowedVars = new ArrayList < String > (Arrays.asList("Quit",
-        "Vars",
-        "Clear"));
+    private final ArrayList<String> unallowedVars = new ArrayList<String>(Arrays.asList("Quit",
+            "Vars",
+            "Clear"));
 
     /**
      * Used to parse the inputted string by the Calculator program
+     *
      * @param inputString the string used to parse
-     * @param vars the Environment in which the variables exist
+     * @param vars        the Environment in which the variables exist
      * @return a SymbolicExpression to be evaluated
      * @throws IOException by nextToken() if it reads invalid input
      */
@@ -52,8 +53,9 @@ public class CalculatorParser {
 
     /**
      * Checks wether the token read is a command or an assignment
+     *
      * @return a SymbolicExpression to be evaluated
-     * @throws IOException by nextToken() if it reads invalid input
+     * @throws IOException          by nextToken() if it reads invalid input
      * @throws SyntaxErrorException if the token parsed cannot be turned into a valid expression
      */
     private SymbolicExpression statement() throws IOException {
@@ -86,6 +88,7 @@ public class CalculatorParser {
 
     /**
      * Checks what kind of command that should be returned
+     *
      * @return an instance of Quit, Clear or Vars depending on the token parsed
      * @throws IOException by nextToken() if it reads invalid input
      */
@@ -101,12 +104,13 @@ public class CalculatorParser {
 
 
     /**
-     * Checks wether the token read is an assignment between 2 expression and 
+     * Checks wether the token read is an assignment between 2 expression and
      * descend into the right hand side of '='
+     *
      * @return a SymbolicExpression to be evaluated
-     * @throws IOException by nextToken() if it reads invalid input
+     * @throws IOException          by nextToken() if it reads invalid input
      * @throws SyntaxErrorException if the token parsed cannot be turned into a valid expression,
-     *         the variable on rhs of '=' is a number or invalid variable
+     *                              the variable on rhs of '=' is a number or invalid variable
      */
     private SymbolicExpression assignment() throws IOException {
         SymbolicExpression result = expression();
@@ -132,8 +136,9 @@ public class CalculatorParser {
 
     /**
      * Check if valid identifier for variable and return that if so
+     *
      * @return a SymbolicExpression that is either a named constant or a new variable
-     * @throws IOException by nextToken() if it reads invalid input
+     * @throws IOException                by nextToken() if it reads invalid input
      * @throws IllegalExpressionException if you try to redefine a string that isn't allowed
      */
     private SymbolicExpression identifier() throws IOException {
@@ -152,15 +157,15 @@ public class CalculatorParser {
     }
 
     // bättre att debugga än metoden under 
-    public SymbolicExpression expression() {
+    public SymbolicExpression expression() throws IOException {
         SymbolicExpression result = term();
         while (st.ttype == '+' || st.ttype == '-') {
             int operation = st.ttype;
             st.nextToken();
             if (operation == '+') {
-                result = new SymbolicExpression("Addition", result, term());
+                result = new Addition(result, term());
             } else {
-                result = new SymbolicExpression("Subtraction", result, term());
+                result = new Subtraction(result, term());
             }
         }
         return result;
@@ -193,6 +198,7 @@ public class CalculatorParser {
      * Checks wether the token read is an Multiplication or
      * Division and then continue on with the right hand side of
      * operator
+     *
      * @return a SymbolicExpression to be evaluated
      * @throws IOException by nextToken() if it reads invalid input
      */
@@ -220,10 +226,11 @@ public class CalculatorParser {
      * operation is an unary operation and then continue on with
      * the right hand side of that operator else if it's a
      * number/identifier
+     *
      * @return a SymbolicExpression to be evaluated
-     * @throws IOException by nextToken() if it reads invalid input
+     * @throws IOException          by nextToken() if it reads invalid input
      * @throws SyntaxErrorException if the token parsed cannot be turned into a valid expression,
-     *         missing right parantheses
+     *                              missing right parantheses
      */
     private SymbolicExpression primary() throws IOException {
         SymbolicExpression result;
@@ -238,10 +245,10 @@ public class CalculatorParser {
             result = unary();
         } else if (this.st.ttype == this.st.TT_WORD) {
             if (st.sval.equals(SIN) ||
-                st.sval.equals(COS) ||
-                st.sval.equals(EXP) ||
-                st.sval.equals(NEG) ||
-                st.sval.equals(LOG)) {
+                    st.sval.equals(COS) ||
+                    st.sval.equals(EXP) ||
+                    st.sval.equals(NEG) ||
+                    st.sval.equals(LOG)) {
 
                 result = unary();
             } else {
@@ -257,6 +264,7 @@ public class CalculatorParser {
     /**
      * Checks what type of Unary operation the token read is and
      * then continues with the expression that the operator holds
+     *
      * @return a SymbolicExpression to be evaluated
      * @throws IOException by nextToken() if it reads invalid input
      */
@@ -281,10 +289,11 @@ public class CalculatorParser {
 
     /**
      * Checks if the token read is a number - should always be a number in this method
+     *
      * @return a SymbolicExp eression to be evaluated
-     * @throws IOException by nextToken() if it reads invalid input
+     * @throws IOException          by nextToken() if it reads invalid input
      * @throws SyntaxErrorException if the token parsed cannot be turned into a valid expression,
-     *         expected a number which is not present
+     *                              expected a number which is not present
      */
     private SymbolicExpression number() throws IOException {
         this.st.nextToken();
