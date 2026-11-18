@@ -9,4 +9,13 @@ public class Cos extends Unary{
     public String getName(){
         return "cos";
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Cos) {
+            Cos c= (Cos) object;
+            return super.argument == c.argument;
+        }
+        return false;
+    }
 }

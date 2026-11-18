@@ -9,4 +9,17 @@ public class Multiplication extends Binary {
     public String getName() {
         return "*";
     }
+
+    @Override
+    public int getPriority() {
+        return 3;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Multiplication)
+            return lhs.equals(object) && rhs.equals(object);
+
+        return false;
+    }
 }

@@ -9,4 +9,14 @@ public class Sin extends Unary {
     public String getName() {
         return "sin";
     }
+
+    @Override 
+    public boolean equals(Object object){
+        if(object instanceof Sin){
+            Sin s = (Sin)object;
+            return super.argument == s.argument;
+        }
+        return false;
+            
+    }
 }

@@ -10,4 +10,16 @@ public class Addition extends Binary {
     public String getName() {
         return "+";
     }
+
+    @Override 
+    public int getPriority() {
+        return 4;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Addition)
+            return lhs.equals(object) && rhs.equals(object);
+        return false;
+    }
 }

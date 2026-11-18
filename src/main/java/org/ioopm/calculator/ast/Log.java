@@ -9,4 +9,13 @@ public class Log extends Unary {
     public String getName() {
         return "log";
     }
+
+    @Override 
+    public boolean equals(Object object){
+        if(object instanceof Log){
+            Log l = (Log)object;
+            return super.argument == l.argument;
+        }
+        return false;
+    }
 }

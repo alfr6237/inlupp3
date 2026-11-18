@@ -10,4 +10,9 @@ public class Quit extends Command {
         return INSTANCE;
     }
 
+    @Override 
+    public boolean equals(Object object){
+        return object instanceof Quit;
+    }
+
 }

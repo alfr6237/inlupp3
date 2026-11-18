@@ -9,4 +9,11 @@ public class Assignment extends Binary {
     public String getName() {
         return "=";
     }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Assignment)
+            return lhs.equals(object) && rhs.equals(object);
+        return false;
+    }
 }

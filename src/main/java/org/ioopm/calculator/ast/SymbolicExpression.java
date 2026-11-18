@@ -2,11 +2,6 @@ package org.ioopm.calculator.ast;
 
 public abstract class SymbolicExpression {
 
-    protected int _priority;
-
-    public SymbolicExpression() {
-        _priority = 1;
-    }
 
     public boolean isConstant() {
         return false;
@@ -17,8 +12,19 @@ public abstract class SymbolicExpression {
     }
 
     public int getPriority() {
-        return _priority;
+        return 1;
     }
+
+    public double getValue(){
+        throw new RuntimeException("getValue called on expression that is not constant");
+    }
+
+    public SymbolicExpression eval(){
+        return this;
+    }
+
+    public abstract boolean equals(Object object);
+        
 }
 
 
