@@ -1,8 +1,10 @@
 package org.ioopm.calculator.ast;
 
 public class Assignment extends Binary {
-    public Assignment(SymbolicExpression a, SymbolicExpression b) {
-        super(a, b);
+    public Assignment(SymbolicExpression lhs, SymbolicExpression rhs) {
+        super(lhs, rhs);
+        assert(rhs instanceof Variable);
+        
     }
 
     @Override
@@ -12,13 +14,13 @@ public class Assignment extends Binary {
 
     @Override
     public boolean equals(Object object) {
-        if (object instanceof Assignment)
-            return lhs.equals(object) && rhs.equals(object);
+        if (object instanceof Assignment a)
+            return lhs.equals(a.lhs) && rhs.equals(a.rhs);
         return false;
     }
 
-    @Override 
-    public SymbolicExpression eval(){
-        return new Assignment(lhs.eval(), rhs);
-    }
+    @Override
+    public SymbolicExpression eval(Environment vars) {
+        vars.put((Variable)rhs, lhs);
+        return lhs.eval(vars);    }
 }

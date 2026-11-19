@@ -24,14 +24,14 @@ public class Multiplication extends Binary {
     }
 
     @Override
-    public SymbolicExpression eval(){
-        SymbolicExpression rhs_eval = rhs.eval();
-        SymbolicExpression lhs_eval = lhs.eval();
+    public SymbolicExpression eval(Environment vars){
+        SymbolicExpression rhs_eval = rhs.eval(vars);
+        SymbolicExpression lhs_eval = lhs.eval(vars);
         if(lhs_eval.isConstant() && rhs_eval.isConstant()){
             Constant l = (Constant)lhs_eval;
             Constant r = (Constant)rhs_eval;
             return new Constant(l.getValue() * r.getValue());
         } 
-        return new Multiplication(lhs_eval.eval(), rhs_eval.eval());
+        return new Multiplication(lhs_eval, rhs_eval);
     }
 }

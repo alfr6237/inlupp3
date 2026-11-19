@@ -20,8 +20,8 @@ public class Log extends Unary {
     }
 
     @Override 
-    public SymbolicExpression eval(){
-        SymbolicExpression arg_eval = super.argument.eval();
+    public SymbolicExpression eval(Environment vars){
+        SymbolicExpression arg_eval = super.argument.eval(vars);
         if(arg_eval.isConstant()){
             return new Constant(Math.log(arg_eval.getValue()));
         }

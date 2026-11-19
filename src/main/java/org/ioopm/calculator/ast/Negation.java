@@ -21,8 +21,8 @@ public class Negation extends Unary {
     }
 
     @Override 
-    public SymbolicExpression eval(){
-        SymbolicExpression arg_eval = super.argument.eval();
+    public SymbolicExpression eval(Environment vars){
+        SymbolicExpression arg_eval = super.argument.eval(vars);
         if(arg_eval.isConstant()){
             return new Constant(arg_eval.getValue());
         }

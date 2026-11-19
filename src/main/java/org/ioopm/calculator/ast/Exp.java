@@ -25,8 +25,8 @@ public class Exp extends Unary {
     }
 
     @Override 
-    public SymbolicExpression eval(){
-        SymbolicExpression arg_eval = super.argument.eval();
+    public SymbolicExpression eval(Environment vars){
+        SymbolicExpression arg_eval = super.argument.eval(vars);
         if(arg_eval.isConstant()){
             return new Constant(Math.exp(arg_eval.getValue()));
         }

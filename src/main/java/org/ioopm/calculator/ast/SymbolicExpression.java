@@ -21,7 +21,7 @@ public abstract class SymbolicExpression {
 
     public abstract boolean equals(Object object);
 
-    public abstract SymbolicExpression eval();
+    public abstract SymbolicExpression eval(Environment vars);
 }
 
 

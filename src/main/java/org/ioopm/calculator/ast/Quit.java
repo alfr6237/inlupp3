@@ -1,18 +1,23 @@
 package org.ioopm.calculator.ast;
 
 public class Quit extends Command {
-    private static final Quit INSTANCE = new Quit();
+    private static final Quit theInstance = new Quit();
 
     private Quit() {
     }
 
     public static Quit instance() {
-        return INSTANCE;
+        return theInstance;
     }
 
-    @Override 
-    public boolean equals(Object object){
+    @Override
+    public boolean equals(Object object) {
         return object instanceof Quit;
+    }
+
+    @Override
+    public SymbolicExpression eval(Environment vars) {
+        return theInstance;
     }
 
 }

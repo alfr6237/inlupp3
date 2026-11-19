@@ -10,21 +10,21 @@ public class Sin extends Unary {
         return "sin";
     }
 
-    @Override 
-    public boolean equals(Object object){
-        if(object instanceof Sin){
-            Sin s = (Sin)object;
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Sin s) {
             return argument.equals(s.argument);
         }
         return false;
     }
-    
+
     @Override 
-    public SymbolicExpression eval(){
-        SymbolicExpression arg_eval = super.argument.eval();
-        if(arg_eval.isConstant()){
-            return new Constant(Math.sin(arg_eval.getValue()));
-        }
-        return new Sin(arg_eval);
+    public SymbolicExpression eval(Environment vars){
+    SymbolicExpression arg = super.argument.eval(vars);
+    if (arg.isConstant()) {
+        return new Constant(Math.sin(arg.getValue()));
+    } else {
+        return new Sin(arg);
     }
+}
 }

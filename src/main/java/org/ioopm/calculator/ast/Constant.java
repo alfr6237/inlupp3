@@ -27,18 +27,15 @@ public class Constant extends Atom {
 
     @Override
     public boolean equals(Object object) {
-        if (object instanceof Constant) {
-            Constant c = (Constant) object;
-            if (c.value == this.value) {
-                return true;
-            }
+        if (object instanceof Constant c) {
+            return Math.abs(value - c.value) < 1e-10;
         }
         return false;
     }
 
     @Override
-    public SymbolicExpression eval(){
+    public SymbolicExpression eval(Environment vars) {
         return this;
-    }    
+    }
 
 };
