@@ -13,9 +13,18 @@ public class Cos extends Unary{
     @Override
     public boolean equals(Object object) {
         if (object instanceof Cos) {
-            Cos c= (Cos) object;
-            return super.argument == c.argument;
+            Cos c = (Cos)object;
+            return argument.equals(c.argument);
         }
         return false;
+    }
+
+    @Override 
+    public SymbolicExpression eval(){
+        SymbolicExpression arg_eval = super.argument.eval();
+        if(arg_eval.isConstant()){
+            return new Constant(Math.cos(arg_eval.getValue()));
+        }
+        return new Cos(arg_eval);
     }
 }

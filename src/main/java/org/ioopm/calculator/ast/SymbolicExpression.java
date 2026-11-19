@@ -19,12 +19,9 @@ public abstract class SymbolicExpression {
         throw new RuntimeException("getValue called on expression that is not constant");
     }
 
-    public SymbolicExpression eval(){
-        return this;
-    }
-
     public abstract boolean equals(Object object);
-        
+
+    public abstract SymbolicExpression eval();
 }
 
 

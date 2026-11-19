@@ -34,7 +34,11 @@ public class Constant extends Atom {
             }
         }
         return false;
-
     }
+
+    @Override
+    public SymbolicExpression eval(){
+        return this;
+    }    
 
 };

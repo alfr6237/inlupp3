@@ -24,4 +24,13 @@ public class Exp extends Unary {
         return false;
     }
 
+    @Override 
+    public SymbolicExpression eval(){
+        SymbolicExpression arg_eval = super.argument.eval();
+        if(arg_eval.isConstant()){
+            return new Constant(Math.exp(arg_eval.getValue()));
+        }
+        return new Exp(arg_eval);
+    }
+
 }

@@ -16,4 +16,9 @@ public class Assignment extends Binary {
             return lhs.equals(object) && rhs.equals(object);
         return false;
     }
+
+    @Override 
+    public SymbolicExpression eval(){
+        return new Assignment(lhs.eval(), rhs);
+    }
 }

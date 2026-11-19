@@ -18,4 +18,13 @@ public class Log extends Unary {
         }
         return false;
     }
+
+    @Override 
+    public SymbolicExpression eval(){
+        SymbolicExpression arg_eval = super.argument.eval();
+        if(arg_eval.isConstant()){
+            return new Constant(Math.log(arg_eval.getValue()));
+        }
+        return new Log(arg_eval);
+    }
 }

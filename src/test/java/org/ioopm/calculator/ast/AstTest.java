@@ -53,7 +53,7 @@ public class AstTest {
         Constant result = new Constant(2);
         
         testPrinting("4 / 2", division);
-        testEvaluating(division, result);
+        testEvaluating(result, division);
     }
 
     @Test 
@@ -92,7 +92,7 @@ public class AstTest {
         Constant result = new Constant(4);
         
         testPrinting("5 - 1", sub);
-        testEvaluating(sub, result);
+        testEvaluating(result, sub);
     }
 
     @Test
@@ -105,18 +105,18 @@ public class AstTest {
 
     @Test 
     void assignmentAst() {
-        Constant h = new Constant(10);
+        Constant c = new Constant(10);
         Variable y = new Variable("y"); 
-        Assignment yValue = new Assignment(y, h);
+        Assignment yValue = new Assignment(c, y);
 
-        testPrinting("y = 10", yValue);
+        testPrinting("10 = y", yValue);
     }
 
     @Test
     void evaluatingAst() {
         SymbolicExpression a = new Addition(new Constant(5), new Constant(37));
-        SymbolicExpression b = new Constant(42);
-        testEvaluating(b, a); // tests if reducing a returns b (it should!)
+        SymbolicExpression expected = new Constant(42);
+        testEvaluating(expected, a); // tests if reducing a returns b (it should!)
     }
 
     @Test 
@@ -134,8 +134,11 @@ public class AstTest {
 
         Multiplication m = new Multiplication(a, a);
         Division d = new Division(b, a);
+
+        Constant expected = new Constant(4);
         
-        testEvaluating(d, m);
+        testEvaluating(expected, d);
+        testEvaluating(expected, m);
         
     }
 
@@ -144,9 +147,32 @@ public class AstTest {
         Constant multiplicand = new Constant(2);
         Constant multiplier = new Constant(8);
         Multiplication product = new Multiplication(multiplicand, multiplier);
-        Constant result = new Constant(16);
+        Constant expected = new Constant(16);
         
-        testEvaluating(product, result);     
+        testEvaluating(expected, product);     
+    }
+
+
+    @Test
+    void evalVariable(){
+
+        Addition a = new Addition(new Constant(2), new Constant(3));
+        Variable x = new Variable("x");
+        Constant expected = new Constant(5);
+
+
+        testEvaluating(expected, x);    
+    
+    }
+
+    @Test 
+    void evalSinCosLog() {
+        Sin sin90 = new Sin(new Constant(Math.PI/2));
+        Cos cos90 = new Cos(new Constant(Math.PI/2));
+        Log logE = new Log(new Constant(Math.E));
+        testEvaluating(new Constant(1), sin90);
+        testEvaluating(new Constant(0), cos90);
+        testEvaluating(new Constant(1), logE);        
     }
     
     @AfterEach

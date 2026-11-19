@@ -24,4 +24,9 @@ public class Variable extends Atom {
 
     }
 
+    @Override 
+    public SymbolicExpression eval(){
+        return this;
+    }
+
 }

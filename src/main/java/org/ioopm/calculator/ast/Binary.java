@@ -8,9 +8,6 @@ public abstract class Binary extends SymbolicExpression{
         this.lhs = lhs;
         this.rhs = rhs;
     }
-
-    
-
     
     @Override 
     public String toString(){

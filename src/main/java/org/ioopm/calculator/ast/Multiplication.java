@@ -22,4 +22,16 @@ public class Multiplication extends Binary {
 
         return false;
     }
+
+    @Override
+    public SymbolicExpression eval(){
+        SymbolicExpression rhs_eval = rhs.eval();
+        SymbolicExpression lhs_eval = lhs.eval();
+        if(lhs_eval.isConstant() && rhs_eval.isConstant()){
+            Constant l = (Constant)lhs_eval;
+            Constant r = (Constant)rhs_eval;
+            return new Constant(l.getValue() * r.getValue());
+        } 
+        return new Multiplication(lhs_eval.eval(), rhs_eval.eval());
+    }
 }
