@@ -1,5 +1,7 @@
 package org.ioopm.calculator.ast;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import javax.lang.model.element.VariableElement;
 
 import org.junit.jupiter.api.*;
@@ -158,6 +160,7 @@ public class AstTest {
         Environment vars = new Environment();
 
         testEvaluating(expected, product, vars);
+
     }
 
     @Test
@@ -188,6 +191,33 @@ public class AstTest {
         testEvaluating(new Constant(1), sin90, vars);
         testEvaluating(new Constant(0), cos90, vars);
         testEvaluating(new Constant(1), logE, vars);
+    }
+
+    @Test
+    void illegalAssignment() {
+        Environment vars = new Environment();
+        
+        NamedConstant PI = new NamedConstant("pi", Math.PI);
+        Constant three = new Constant(3);
+        Assignment a = new Assignment(three, PI);
+
+        try {
+            a.eval(vars);
+            System.out.println("expected exception not thrown");
+        } catch(IllegalAssignmentExpression e){
+            System.out.println("expected exception: " + e.getMessage());
+        }      
+    }
+
+    @Test
+    void clearVariable() {
+        Environment vars = new Environment();
+        Variable x = new Variable("x");
+        Assignment xAssign = new Assignment(new Constant(3), x);
+        Clear.instance().eval(vars);
+        if (vars.isEmpty()) {
+            System.out.println("all clear!");
+        }
     }
 
     @AfterEach

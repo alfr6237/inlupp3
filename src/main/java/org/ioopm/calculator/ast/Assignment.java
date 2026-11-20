@@ -3,7 +3,6 @@ package org.ioopm.calculator.ast;
 public class Assignment extends Binary {
     public Assignment(SymbolicExpression lhs, SymbolicExpression rhs) {
         super(lhs, rhs);
-        assert(rhs instanceof Variable);
         
     }
 
@@ -20,7 +19,11 @@ public class Assignment extends Binary {
     }
 
     @Override
-    public SymbolicExpression eval(Environment vars) {
+    public SymbolicExpression eval(Environment vars) throws IllegalAssignmentExpression{
+        if(rhs instanceof NamedConstant){
+            throw new IllegalAssignmentExpression("Error: Cannot assign to named constant");
+        }
         vars.put((Variable)rhs, lhs);
-        return lhs.eval(vars);    }
+        return lhs.eval(vars);    
+    }
 }

@@ -1,5 +1,6 @@
 package org.ioopm.calculator.ast;
 
+
 public class NamedConstant extends Constant {
     private final String name;
 
@@ -12,4 +13,7 @@ public class NamedConstant extends Constant {
     public String toString() {
         return name;
     }
+
+    
+
 }

@@ -6,6 +6,10 @@ public abstract class SymbolicExpression {
     public boolean isConstant() {
         return false;
     }
+
+    public boolean isCommand(){
+        return false;
+    }
     
     public  String getName() throws RuntimeException{
         throw new RuntimeException("getName() called on expression with no operator");
@@ -21,7 +25,8 @@ public abstract class SymbolicExpression {
 
     public abstract boolean equals(Object object);
 
-    public abstract SymbolicExpression eval(Environment vars);
+    public abstract SymbolicExpression eval(Environment vars) throws IllegalAssignmentExpression;
+
 }
 
 
