@@ -10,6 +10,7 @@ import org.ioopm.calculator.ast.SymbolicExpression;
 import org.ioopm.calculator.ast.Variable;
 import org.ioopm.calculator.ast.Vars;
 import org.ioopm.calculator.parser.CalculatorParser;
+import org.ioopm.calculator.parser.IllegalExpressionException;
 import org.ioopm.calculator.parser.SyntaxErrorException;
 import org.ioopm.calculator.ast.Assignment;
 import org.ioopm.calculator.ast.Clear;
@@ -58,7 +59,7 @@ public class Calculator {
                     }        
                 }
                 
-            } catch (IOException | IllegalAssignmentException | SyntaxErrorException e) {
+            } catch (IOException | IllegalAssignmentException | SyntaxErrorException | IllegalExpressionException e) {
                 System.out.println(e.getMessage());
             } 
             expressionsEntered++; 
