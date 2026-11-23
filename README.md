@@ -1,7 +1,6 @@
 # Inlupp 3
 ***
-This is a README file for assignment 3 of the IOOPM-course.
-The assignment is based on the previous task assignment.\
+This is a README file for assignment 3 of the IOOPM-course.\
 This program was created by Ella Odlander and Alfred Frändberg in the autumn 2026.
 ## How to use the program
 *** 
