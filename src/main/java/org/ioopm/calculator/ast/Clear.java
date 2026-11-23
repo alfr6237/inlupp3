@@ -15,6 +15,4 @@ public class Clear extends Command {
         return object instanceof Clear;
     }
 
-  
-
 }

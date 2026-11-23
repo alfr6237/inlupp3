@@ -40,10 +40,13 @@ public class CalculatorParser {
      * @param vars        the Environment in which the variables exist
      * @return a SymbolicExpression to be evaluated
      * @throws IOException by nextToken() if it reads invalid input
+     * @throws SyntaxErrorException if the token parsed cannot be turned into a
+     *                              valid expression
+     *
      */
     public SymbolicExpression 
     parse(String inputString, Environment vars)
-            throws IOException  {
+            throws IOException, SyntaxErrorException {
         this.st = new StreamTokenizer(new StringReader(inputString)); // reads from inputString via stringreader.
         this.vars = vars;
         this.st.ordinaryChar('-');
@@ -131,9 +134,6 @@ public class CalculatorParser {
             } else {
                 if (this.st.sval.equals("ans")) {
                     throw new SyntaxErrorException("Error: ans cannot be redefined");
-                }
-                if(Constants.namedConstants.containsKey(this.st.sval)){
-                    throw new SyntaxErrorException("Error: named constant cannot be redefined");
                 }
                 SymbolicExpression key = identifier( );
                 result = new Assignment(result, key);
