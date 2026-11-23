@@ -11,19 +11,18 @@ public class Negation extends Unary {
         return "-";
     }
 
-    @Override 
-    public boolean equals(Object object){
-        if(object instanceof Negation){
-            Negation l = (Negation)object;
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Negation l) {
             return super.argument == l.argument;
         }
         return false;
     }
 
-    @Override 
-    public SymbolicExpression eval(Environment vars){
+    @Override
+    public SymbolicExpression eval(Environment vars) {
         SymbolicExpression arg_eval = super.argument.eval(vars);
-        if(arg_eval.isConstant()){
+        if (arg_eval.isConstant()) {
             return new Constant(arg_eval.getValue());
         }
         return new Negation(arg_eval);

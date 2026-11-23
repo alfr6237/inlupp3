@@ -17,17 +17,16 @@ public class Exp extends Unary {
 
     @Override
     public boolean equals(Object object) {
-        if (object instanceof Exp) {
-            Exp e = (Exp) object;
+        if (object instanceof Exp e) {
             return super.argument == e.argument;
         }
         return false;
     }
 
-    @Override 
-    public SymbolicExpression eval(Environment vars){
+    @Override
+    public SymbolicExpression eval(Environment vars) {
         SymbolicExpression arg_eval = super.argument.eval(vars);
-        if(arg_eval.isConstant()){
+        if (arg_eval.isConstant()) {
             return new Constant(Math.exp(arg_eval.getValue()));
         }
         return new Exp(arg_eval);

@@ -15,9 +15,6 @@ public class Clear extends Command {
         return object instanceof Clear;
     }
 
-    @Override
-    public SymbolicExpression eval(Environment vars) {
-        return theInstance;
-    }
+  
 
 }

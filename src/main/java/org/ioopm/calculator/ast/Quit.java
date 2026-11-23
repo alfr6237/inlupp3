@@ -14,10 +14,4 @@ public class Quit extends Command {
     public boolean equals(Object object) {
         return object instanceof Quit;
     }
-
-    @Override
-    public SymbolicExpression eval(Environment vars) {
-        return theInstance;
-    }
-
 }

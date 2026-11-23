@@ -1,11 +1,11 @@
 package org.ioopm.calculator.ast;
 
-public class IllegalAssignmentExpression extends RuntimeException {
-    public IllegalAssignmentExpression(){
+public class IllegalAssignmentException extends RuntimeException {
+    public IllegalAssignmentException() {
         super();
     }
 
-    public IllegalAssignmentExpression(String msg){
+    public IllegalAssignmentException(String msg) {
         super(msg);
     }
 }

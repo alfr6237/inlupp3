@@ -15,9 +15,6 @@ public class Vars extends Command {
         return object instanceof Vars;
     }
 
-    @Override
-    public SymbolicExpression eval(Environment vars) {
-        return theInstance;
-    }
+  
 
 }

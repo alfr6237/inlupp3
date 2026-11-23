@@ -10,19 +10,18 @@ public class Log extends Unary {
         return "log";
     }
 
-    @Override 
-    public boolean equals(Object object){
-        if(object instanceof Log){
-            Log l = (Log)object;
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof Log l) {
             return super.argument == l.argument;
         }
         return false;
     }
 
-    @Override 
-    public SymbolicExpression eval(Environment vars){
+    @Override
+    public SymbolicExpression eval(Environment vars) {
         SymbolicExpression arg_eval = super.argument.eval(vars);
-        if(arg_eval.isConstant()){
+        if (arg_eval.isConstant()) {
             return new Constant(Math.log(arg_eval.getValue()));
         }
         return new Log(arg_eval);

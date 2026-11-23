@@ -2,28 +2,26 @@ package org.ioopm.calculator.ast;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import javax.lang.model.element.VariableElement;
-
 import org.junit.jupiter.api.*;
 
 public class AstTest {
 
     public void testPrinting(String expected, SymbolicExpression e) {
-        // assertTrue(expected.equals("" + e));
-        if (expected.equals("" + e)) {
-            System.out.println("Passed: " + e);
-        } else {
-            System.out.println("Error: expected '" + expected + "' but got '" + e + "'");
-        }
+        assertEquals(expected.toString(), e.toString());
+        // if (expected.equals("" + e)) {
+        //     System.out.println("Passed: " + e);
+        // } else {
+        //     System.out.println("Error: expected '" + expected + "' but got '" + e + "'");
+        // }
     }
 
     public void testEvaluating(SymbolicExpression expected, SymbolicExpression e, Environment vars) {
-        SymbolicExpression r = e.eval(vars);
-        if (r.equals(expected)) {
-            System.out.println("Passed: " + e);
-        } else {
-            System.out.println("Error: expected '" + expected + "' but got '" + r + "'");
-        }
+        assertEquals(expected.eval(vars), e.eval(vars));
+        // if (r.equals(expected)) {
+        //     System.out.println("Passed: " + e);
+        // } else {
+        //     System.out.println("Error: expected '" + expected + "' but got '" + r + "'");
+        // }
     }
 
     @BeforeAll
@@ -168,16 +166,16 @@ public class AstTest {
 
         Addition a = new Addition(new Constant(2), new Constant(3));
         Variable x = new Variable("x");
-        
+
         Constant expected = new Constant(5);
         Environment vars = new Environment();
         //vars.put(x, a);
         Assignment assign = new Assignment(a, x);
-    
+
         testEvaluating(expected, assign, vars);
         Variable x2 = new Variable("x");
         Variable y = new Variable("y");
-        
+
         System.out.println("x1 = " + x.hashCode() + "\nx2 = " + x2.hashCode());
         System.out.println("y = " + y.hashCode());
     }
@@ -196,7 +194,7 @@ public class AstTest {
     @Test
     void illegalAssignment() {
         Environment vars = new Environment();
-        
+
         NamedConstant PI = new NamedConstant("pi", Math.PI);
         Constant three = new Constant(3);
         Assignment a = new Assignment(three, PI);
@@ -204,21 +202,11 @@ public class AstTest {
         try {
             a.eval(vars);
             System.out.println("expected exception not thrown");
-        } catch(IllegalAssignmentExpression e){
+        } catch (IllegalAssignmentException e) {
             System.out.println("expected exception: " + e.getMessage());
-        }      
-    }
-
-    @Test
-    void clearVariable() {
-        Environment vars = new Environment();
-        Variable x = new Variable("x");
-        Assignment xAssign = new Assignment(new Constant(3), x);
-        Clear.instance().eval(vars);
-        if (vars.isEmpty()) {
-            System.out.println("all clear!");
         }
     }
+
 
     @AfterEach
     void tearDown() {

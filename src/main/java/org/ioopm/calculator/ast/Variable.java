@@ -7,33 +7,30 @@ public class Variable extends Atom {
         this.identifier = identifier;
     }
 
-    @Override 
-    public String toString(){
+    @Override
+    public String toString() {
         return this.identifier;
     }
 
     @Override
     public boolean equals(Object object) {
-        if (object instanceof Variable) {
-            String s = object.toString();
-            if (identifier.equals(s)) {
-                return true;
-            }
+        if (object instanceof Variable v) {
+            return identifier.equals(v.toString());
         }
         return false;
 
     }
 
-    @Override 
-    public SymbolicExpression eval(Environment vars){
-        if(vars.containsKey(this)){
+    @Override
+    public SymbolicExpression eval(Environment vars) {
+        if (vars.containsKey(this)) {
             return vars.get(this).eval(vars);
         }
         return this;
     }
 
-    @Override 
-    public int hashCode(){
+    @Override
+    public int hashCode() {
         return identifier.hashCode();
     }
 
