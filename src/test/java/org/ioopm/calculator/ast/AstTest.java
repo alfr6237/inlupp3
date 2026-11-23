@@ -1,6 +1,8 @@
 package org.ioopm.calculator.ast;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 import org.junit.jupiter.api.*;
 
@@ -195,13 +197,7 @@ public class AstTest {
         NamedConstant PI = new NamedConstant("pi", Math.PI);
         Constant three = new Constant(3);
         Assignment a = new Assignment(three, PI);
-
-        try {
-            a.eval(vars);
-            System.out.println("expected exception not thrown");
-        } catch (IllegalAssignmentException e) {
-            System.out.println("expected exception: " + e.getMessage());
-        }
+        assertThrows(IllegalAssignmentException.class, () -> a.eval(vars));
     }
 
 
