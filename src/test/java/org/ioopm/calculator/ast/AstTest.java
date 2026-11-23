@@ -175,9 +175,6 @@ public class AstTest {
         testEvaluating(expected, assign, vars);
         Variable x2 = new Variable("x");
         Variable y = new Variable("y");
-
-        System.out.println("x1 = " + x.hashCode() + "\nx2 = " + x2.hashCode());
-        System.out.println("y = " + y.hashCode());
     }
 
     @Test
